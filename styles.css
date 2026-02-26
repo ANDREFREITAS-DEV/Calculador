@@ -1,0 +1,265 @@
+/* =========================================
+   RESET BASE
+========================================= */
+* { box-sizing: border-box; }
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  display:flex;
+  justify-content:center;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* =========================================
+   VARIÁVEIS - DARK DEFAULT
+========================================= */
+:root{
+  --bg: radial-gradient(circle at top, #1f2430 0%, #0f1115 60%);
+  --text:#ffffff;
+
+  --display-bg: rgba(255,255,255,0.05);
+  --display-border: rgba(255,255,255,0.08);
+
+  --btn-bg: linear-gradient(180deg,#2b2f3a,#1c1f26);
+  --btn-text:#ffffff;
+  --btn-shadow: 0 6px 12px rgba(0,0,0,0.4);
+
+  --op-bg: linear-gradient(180deg,#3a4a7a,#26365c);
+  --ac-bg: linear-gradient(180deg,#a83232,#7a1f1f);
+  --eq-bg: linear-gradient(180deg,#ff8a00,#e66d00);
+
+  --sheet-bg: rgba(0,0,0,0.5);
+  --sheet-card-bg: rgba(255,255,255,0.08);
+  --sheet-item-bg: rgba(255,255,255,0.10);
+
+  --ripple: rgba(255,255,255,0.25);
+}
+
+/* =========================================
+   LIGHT MODE
+========================================= */
+[data-theme="light"]{
+  --bg: radial-gradient(circle at top, #ffffff 0%, #eef1f7 60%);
+  --text:#111318;
+
+  --display-bg: rgba(255,255,255,0.85);
+  --display-border: rgba(0,0,0,0.08);
+
+  --btn-bg: linear-gradient(180deg,#ffffff,#e9edf5);
+  --btn-text:#111318;
+  --btn-shadow: 0 8px 18px rgba(0,0,0,0.12);
+
+  --op-bg: linear-gradient(180deg,#dfe9ff,#c8d8ff);
+  --ac-bg: linear-gradient(180deg,#ffb4b4,#ff7b7b);
+  --eq-bg: linear-gradient(180deg,#ffd08a,#ff9b2f);
+
+  --sheet-bg: rgba(0,0,0,0.25);
+  --sheet-card-bg: rgba(255,255,255,0.95);
+  --sheet-item-bg: rgba(0,0,0,0.05);
+
+  --ripple: rgba(0,0,0,0.12);
+}
+
+/* =========================================
+   APP CONTAINER
+========================================= */
+.app{
+  width:100%;
+  max-width:420px;
+  padding:16px;
+}
+
+/* =========================================
+   DISPLAY
+========================================= */
+.display{
+  position:relative;
+  background:var(--display-bg);
+  border:1px solid var(--display-border);
+  backdrop-filter: blur(10px);
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+}
+.expr{
+  font-size:14px;
+  opacity:0.6;
+  text-align:right;
+  margin-bottom:8px;
+}
+.value{
+  font-size:44px;
+  font-weight:600;
+  text-align:right;
+}
+
+/* =========================================
+   SETTINGS BUTTON (LEFT)
+========================================= */
+.btn-settings{
+  position:absolute;
+  top:12px;
+  left:12px; /* <-- mudou pro lado esquerdo */
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  color:var(--text);
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 6px 12px rgba(0,0,0,0.25);
+}
+[data-theme="light"] .btn-settings{ background:rgba(0,0,0,0.05); }
+
+/* =========================================
+   KEYPAD
+========================================= */
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.keypad button{
+  border:none;
+  border-radius:20px;
+  height:68px;
+  font-size:22px;
+  font-weight:500;
+  cursor:pointer;
+  background:var(--btn-bg);
+  color:var(--btn-text);
+  box-shadow:var(--btn-shadow);
+  transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  position:relative;
+  overflow:hidden; /* necessário pro ripple */
+  -webkit-tap-highlight-color: transparent;
+}
+.keypad button:active{
+  transform:translateY(3px);
+  box-shadow:0 2px 6px rgba(0,0,0,0.6);
+}
+button[data-op]{ background:var(--op-bg); }
+#btn-ac{ background:var(--ac-bg); }
+.eq{ background:var(--eq-bg); }
+
+/* =========================================
+   BRILHO NO "=" (sutil)
+========================================= */
+.eq::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+  transform:skewX(-25deg);
+  animation:shine 4s infinite;
+}
+@keyframes shine{
+  0%{ left:-120%; }
+  20%{ left:120%; }
+  100%{ left:120%; }
+}
+
+/* =========================================
+   RIPPLE (JS injeta span.ripple)
+========================================= */
+.ripple{
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  animation:ripple .55s ease-out;
+  background:var(--ripple);
+  pointer-events:none;
+}
+@keyframes ripple{
+  to{ transform:scale(4); opacity:0; }
+}
+
+/* =========================================
+   HISTÓRICO
+========================================= */
+.history-container{ margin-top:25px; }
+.history-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  font-size:14px;
+  opacity:0.85;
+}
+.hist-clear-btn{
+  border:none;
+  background:transparent;
+  color: #ff5a5a;
+  font-size:12px;
+  cursor:pointer;
+}
+.history-list{ list-style:none; padding:0; margin:0; }
+.hist-item{
+  background:var(--display-bg);
+  border:1px solid var(--display-border);
+  padding:12px;
+  border-radius:14px;
+  margin-bottom:8px;
+}
+.hist-expr{ font-size:12px; opacity:0.6; }
+.hist-res{
+  font-size:16px;
+  font-weight:600;
+  text-align:right;
+  cursor:pointer;
+}
+
+/* =========================================
+   THEME SHEET
+========================================= */
+.hidden{ display:none !important; }
+.sheet{
+  position:fixed;
+  inset:0;
+  background:var(--sheet-bg);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:16px;
+  z-index:9999;
+}
+.sheet-card{
+  width:100%;
+  max-width:420px;
+  border-radius:20px;
+  background:var(--sheet-card-bg);
+  padding:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+.sheet-title{
+  font-size:14px;
+  opacity:0.75;
+  margin-bottom:12px;
+}
+.sheet-item, .sheet-close{
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:14px 12px;
+  margin-bottom:10px;
+  font-size:16px;
+  cursor:pointer;
+  background:var(--sheet-item-bg);
+  color:var(--text);
+  position:relative;
+}
+.sheet-item.active::after{
+  content:"✓";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-weight:700;
+}

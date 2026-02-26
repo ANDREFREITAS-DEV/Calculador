@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1115" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>Calculadora</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="display">
+      <!-- botão do tema no canto ESQUERDO para não atrapalhar o visor -->
+      <button id="btn-settings" class="btn-settings" aria-label="Configurações">⚙️</button>
+
+      <div id="display-expr" class="expr"></div>
+      <div id="display-value" class="value">0</div>
+    </header>
+
+    <section id="keypad" class="keypad" aria-label="Teclado da calculadora">
+      <button id="btn-ac">AC</button>
+      <button id="btn-percent">%</button>
+      <button id="btn-back">⌫</button>
+      <button data-op="÷">÷</button>
+
+      <button data-digit="7">7</button>
+      <button data-digit="8">8</button>
+      <button data-digit="9">9</button>
+      <button data-op="×">×</button>
+
+      <button data-digit="4">4</button>
+      <button data-digit="5">5</button>
+      <button data-digit="6">6</button>
+      <button data-op="-">-</button>
+
+      <button data-digit="1">1</button>
+      <button data-digit="2">2</button>
+      <button data-digit="3">3</button>
+      <button data-op="+">+</button>
+
+      <button data-digit="0">0</button>
+      <button id="btn-sign">±</button>
+      <button id="btn-dot">,</button>
+      <button id="btn-eq" class="eq">=</button>
+    </section>
+
+    <div class="history-container">
+      <div class="history-header">
+        <span class="history-title">Histórico</span>
+        <button id="btn-clear-history" class="hist-clear-btn">Limpar</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+    </div>
+
+    <!-- Sheet do tema (overlay global) -->
+    <div id="theme-sheet" class="sheet hidden" role="dialog" aria-modal="true">
+      <div class="sheet-card">
+        <div class="sheet-title">Tema</div>
+
+        <button class="sheet-item" data-theme-mode="system">Sistema</button>
+        <button class="sheet-item" data-theme-mode="light">Claro</button>
+        <button class="sheet-item" data-theme-mode="dark">Escuro</button>
+
+        <button id="btn-sheet-close" class="sheet-close">Fechar</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+		eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZ3N0ZnVndXZjcG92dXljd3dqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODY3ODE1NywiZXhwIjoyMDg0MjU0MTU3fQ.xoIu9I3zWp7_UrwcNt5kfyYkfkQXFlXWu9KGVl8GIlE
+sempre roda o servidor		npx http-server .
