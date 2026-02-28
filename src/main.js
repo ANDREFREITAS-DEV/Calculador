@@ -49,8 +49,13 @@ function openHistory() {
 
 function closeHistory() {
   if (!historyPanel || !historyBackdrop) return;
+
   historyPanel.classList.remove("active");
   historyBackdrop.classList.remove("active");
+
+  // força voltar para fora da tela
+  historyPanel.style.top = "-100vh";
+
   historyPanel.setAttribute("aria-hidden", "true");
   historyBackdrop.setAttribute("aria-hidden", "true");
 }
