@@ -19,6 +19,24 @@
       <div id="display-value" class="value">0</div>
     </header>
 
+    <!-- Backdrop do histórico (fecha ao tocar fora) -->
+    <div id="history-backdrop" class="history-backdrop" aria-hidden="true"></div>
+
+    <!-- Painel deslizante do histórico (desce abaixo do visor) -->
+    <section id="history-panel" class="history-panel" aria-hidden="true" role="dialog" aria-label="Histórico">
+      <div class="history-panel-body">
+        <div class="history-panel-header">
+          <span class="history-title">Histórico</span>
+        </div>
+        <ul id="history-list" class="history-list"></ul>
+      </div>
+
+      <div class="history-actions">
+        <button id="btn-clear-history" class="history-action-btn danger">Limpar histórico</button>
+        <button id="btn-close-history" class="history-action-btn">Fechar</button>
+      </div>
+    </section>
+
     <section id="keypad" class="keypad" aria-label="Teclado da calculadora">
       <button id="btn-ac">AC</button>
       <button id="btn-percent">%</button>
@@ -45,14 +63,6 @@
       <button id="btn-dot">,</button>
       <button id="btn-eq" class="eq">=</button>
     </section>
-
-    <div class="history-container">
-      <div class="history-header">
-        <span class="history-title">Histórico</span>
-        <button id="btn-clear-history" class="hist-clear-btn">Limpar</button>
-      </div>
-      <ul id="history-list" class="history-list"></ul>
-    </div>
 
     <!-- Sheet do tema (overlay global) -->
     <div id="theme-sheet" class="sheet hidden" role="dialog" aria-modal="true">
